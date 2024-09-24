@@ -14,7 +14,8 @@ import math
 ############################################################
 
 
-#TODO: Choose how to implement epsilon and must report it.
+#TODO: Choose how to implement epsilon and must report it. ANSWER: In our function, we used allclose() and isclose(), which 
+# allow you to speify a tolerance parameter. We used epsilon here, allowing a specified amount of leeway.
 
 #Input: matrix ∈ ×. Return: True if m∈SO(n) (within epsilon numerical preci-sion), false otherwise. (Consider n=2 or n=3 only)
 def check_SOn(matrix, epsilon = 0.01):
@@ -31,13 +32,7 @@ def check_SOn(matrix, epsilon = 0.01):
 
     return determinant_check and orthogonal_check
 
-#Examples
-# R = np.array([[1, 0], [0, 1]])  
-# print(check_SOn(R, epsilon=1e-6))
-# R2 = np.array([[1, 0], [0, 0.5]])
-# print(check_SOn(R2, epsilon=1e-6))
-
-# Input: vector ∈ ×. Return: True if vector ∈ S3 (within epsilon numericalprecision), false otherwise
+#Input: vector ∈ ×. Return: True if vector ∈ S3 (within epsilon numericalprecision), false otherwise
 def check_quaternion(vector, epsilon = 0.01):
     #Quaternion vector must be length 4
     if len(vector) != 4:
@@ -46,13 +41,7 @@ def check_quaternion(vector, epsilon = 0.01):
     magnitude = np.sqrt(np.sum(np.square(vector)))
     return np.isclose(magnitude, 1, atol=epsilon)
 
-# q = [1, 0, 0, 0]  
-# print(check_quaternion(q))
-# q2 = [1, 1, 0, 1]  
-# print(check_quaternion(q2))
-
-
-# Input: matrix ∈×. Return: True if ∈SE(n) (within epsilon numerical precision),false otherwise. (Consider n=2 or n=3 only)
+#Input: matrix ∈×. Return: True if ∈SE(n) (within epsilon numerical precision),false otherwise. (Consider n=2 or n=3 only)
 def check_SEn(matrix, epsilon = 0.01):
     #Make sure the rotation part of the matrix is valid
     n = matrix.shape[0] - 1 #dim of rot matrix
@@ -76,12 +65,7 @@ def check_SEn(matrix, epsilon = 0.01):
     #All good at this point    
     return True
 
-# T = np.array([[1, 0, 0, 3], [0, 1, 0, 4], [0, 0, 1, 5], [0, 0, 0, 1]])  # SE(3) matrix
-# print(check_SEn(T))  # Output: True
-
-
-#EXTRA CREDIT
-
+#EXTRA CREDIT:
 #Each function corrects the given input if the element is not part of the group within an epsilon
 #distance. The corrected matrix has to be close to the input matrix (always returning the identity is
 #an invalid implementation). The correction implies that you can compute a distance between the
@@ -96,3 +80,37 @@ def correct_SEn(matrix, epsilon=0.01):
     return matrix
 
 #TODO: Test your function with multiple random rotations and report your implementation and the results in your report.
+
+#Testing: 
+
+#check_SOn()
+R = np.array([[1, 0], [0, 1]])  
+print(f"\ncheck_SOn() test - Valid SO(2) matrix\nR:\n {R}\n Returns: {check_SOn(R, epsilon=1e-6)}")
+R = np.array([[1, 0], [0, 0.5]])
+print(f"\ncheck_SOn() test - Invalid SO(2) matrix\nR:\n {R}\n Returns: {check_SOn(R, epsilon=1e-6)}")
+R = np.array([[1], [0], [1]])
+print(f"\ncheck_SOn() test - Invalid SO(2) matrix: Not square matrix\nR:\n {R}\n Returns: {check_SOn(R, epsilon=1e-6)}")
+
+R = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  
+print(f"\ncheck_SOn() test - Valid SO(3) matrix\nR:\n {R}\n Returns: {check_SOn(R, epsilon=1e-6)}")
+R = np.array([[1, 0, 0], [0, 0.5, 0], [0, 0, 1]])  
+print(f"\ncheck_SOn() test - Invalid SO(3) matrix\nR:\n {R}\n Returns: {check_SOn(R, epsilon=1e-6)}")
+R = np.array([[1,0], [0, 1], [1,0]])
+print(f"\ncheck_SOn() test - Invalid SO(2) matrix: Not square matrix\nR:\n {R}\n Returns: {check_SOn(R, epsilon=1e-6)}")
+
+#check_quaternion()
+q = [1, 0, 0, 0]  #Valid quaternion
+print(f"\ncheck_quaternion() test - Valid quaternion\nq:\n {q}\n Returns: {check_quaternion(q)}")
+(q)
+q = [1, 1, 0, 1]  #Invalid quaternion
+print(f"\ncheck_quaternion() test - Invalid quaternion: not unit length\nq:\n {q}\n Returns: {check_quaternion(q)}")
+q = [1, 1, 0, 1, 1, 1, 1]  #Invalid quaternion
+print(f"\ncheck_quaternion() test - Invalid quaternion: length != 4\nq:\n {q}\n Returns: {check_quaternion(q)}")
+
+#check_SEn()
+T = np.array([[1, 0, 0, 3], [0, 1, 0, 4], [0, 0, 1, 5], [0, 0, 0, 1]])   #Valid SE(3) matrix
+print(f"\ncheck_SEn() test - Valid SE(3) matrix\nT:\n {T}\n Returns: {check_SEn(T)}")
+T = np.array([[1, 0, 0, 3], [0, 1, 0, 4], [0, 0, 1, 5], [0, 0, 0, 0]])   #Invalid SE(3) matrix: bottom row is incorrect
+print(f"\ncheck_SEn() test - Invalid SE(3) matrix: bottom row is incorrect\nT:\n {T}\n Returns: {check_SEn(T)}")
+T = np.array([[1, 0, 0, 3], [0, 1, 0, 4], [0, 0, 0.5, 5], [0, 0, 0, 1]]) #Invalid SE(3) matrix: rotation matrix not part of SO(n)
+print(f"\ncheck_SEn() test - Invalid SE(3) matrix: rotation matrix not part of SO(n)\nT:\n {T}\n Returns: {check_SEn(T)}")

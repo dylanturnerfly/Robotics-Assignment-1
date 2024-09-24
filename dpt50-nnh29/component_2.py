@@ -9,7 +9,6 @@ from mpl_toolkits.mplot3d import Axes3D
 import random
 import math
 
-
 ############################################################
 #                Uniform Random Rotations                  #
 ############################################################
@@ -102,7 +101,7 @@ def visualize_rotation_sphere(R):
     ax.legend()
     plt.show()
 
-# visualize_rotation_sphere(random_rotation_matrix(True))
+visualize_rotation_sphere(random_rotation_matrix(True))
 # print(random_rotation_matrix(True))
 # print()
 # print(random_rotation_matrix(False))
