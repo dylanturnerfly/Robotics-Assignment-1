@@ -3,24 +3,17 @@
 # Dylan Turner & Noor Hasan
 
 import numpy as np
-import numpy.linalg 
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import random
-import math
 
 ############################################################
 #                Uniform Random Rotations                  #
 ############################################################
-
-#Input: A boolean that defines how the rotation is generated. If
-#naive is true, implement a naive solution (for example, random euler angles and convert to
-#rotation matrix). If naive is false, implement the function as defined in Figure 1 in [1]. Return:
-#A randomly generated element R∈SO(3).
-
-#Your function should always return valid rotations (calling your function check_SOn should always return True). You can check this 
-#through visualizaton: Check out Algorithm 1 on the report
-
+'''
+Input: A boolean that defines how the rotation is generated. If
+naive is true, implement a naive solution (for example, random euler angles and convert to
+rotation matrix). If naive is false, implement the function as defined in Figure 1 in [1]. Return:
+A randomly generated element R ∈ SO(3).
+'''
 def random_rotation_matrix(naive):
     if(naive):
         #Naive solution
@@ -68,15 +61,13 @@ def random_rotation_matrix(naive):
 
         return M
     
-
-def visualize_rotation_sphere(R):
-    print('hi')
-    v0 = np.array([0, 0, 1])
-    epsilon = 0.1
-    v1 = np.array([0, epsilon, 0]) + v0
-
-    v0_rotated = R @ v0
-    v1_rotated = R @ v1 - v0_rotated
+'''
+Visualizes uniformly random rotations on unit sphere.
+'''
+def visualize_rotation_sphere(amount, naive):
+    v0 = np.array([0, 0, 1]) #north vector
+    epsilon = 0.1 
+    v1 = np.array([0, epsilon, 0]) + v0  #slightly offset north vector
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -88,26 +79,25 @@ def visualize_rotation_sphere(R):
     y = np.outer(np.sin(u), np.sin(v))
     z = np.outer(np.ones(np.size(u)), np.cos(v))
     ax.plot_surface(x, y, z, color='b', alpha=0.3)
-    
-    ax.quiver(*v0_rotated, *v1_rotated, length=0.1, color='r', label='Rotation Effect', arrow_length_ratio=0.1)
-    ax.scatter(*v0_rotated, color='g', s=100, label='Rotated North Pole (v0\')')
-    ax.scatter(*v1_rotated + v0_rotated, color='b', s=100, label='Rotated Nearby Point (v1\')')
 
-    # Labels and Legend
+    for _ in range(amount): #plot vectors
+        R = random_rotation_matrix(naive)  #new random rotation
+        
+        #apply rotation
+        v0_rotated = R @ v0
+        v1_rotated = R @ v1 - v0_rotated
+
+        #plot
+        ax.quiver(*v0_rotated, *v1_rotated, length=0.1, color='r', arrow_length_ratio=0.1)
+        ax.scatter(*v0_rotated, color='g', s=100)  # Rotated North Pole
+        ax.scatter(*v1_rotated + v0_rotated, color='b', s=100)  # Rotated nearby point
+
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
-    ax.set_title('3D Rotation Visualization on Unit Sphere')
-    ax.legend()
+    ax.set_title('3D Visualization of 50 Random Rotations on Unit Sphere')
     plt.show()
 
-visualize_rotation_sphere(random_rotation_matrix(True))
-# print(random_rotation_matrix(True))
-# print()
-# print(random_rotation_matrix(False))
-
-#TODO: In your report include and analyze any design choice of your implementation. Include visual-
-#izations of the random samples (the spheres)
 
 #EXTRA CREDIT:
 
