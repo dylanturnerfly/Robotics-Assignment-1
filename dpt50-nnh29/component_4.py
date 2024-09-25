@@ -131,3 +131,99 @@ def visualize_arm_path(path, name = 'Animation2.gif', speed = 250):
 
     #save gif
     frames[0].save(name, save_all=True, append_images=frames[1:], duration=speed, loop=0)
+
+
+############################################################
+#                         Tests                            #
+############################################################
+
+#Interpolate
+start_angles = (np.deg2rad(0), np.deg2rad(0))
+goal_angles = (np.deg2rad(360), np.deg2rad(-180))
+path = interpolate_arm(start_angles, goal_angles, 25)
+visualize_arm_path(path, 'component_4_interpolate.gif', 50)
+
+#Propogate
+start_angles = (np.deg2rad(0), np.deg2rad(90))
+
+plan = [[np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],
+        [np.pi/4, -np.pi/2, 0.1],]
+
+path = forward_propagate_arm(start_angles, plan)
+visualize_arm_path(path, 'component_4_propogate.gif', 20)

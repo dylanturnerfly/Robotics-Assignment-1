@@ -121,3 +121,28 @@ def visualize_path(path, name = 'Animation.gif'):
 
     #save gif
     frames[0].save(name, save_all=True, append_images=frames[1:], duration=500, loop=0)
+
+
+############################################################
+#                         Tests                            #
+############################################################
+
+
+#Propogate
+start = [[1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]]
+path = [[2, 2, np.pi/4, 1],
+        [2, 2, np.pi/4, 1],
+        [2, 2, np.pi/4, 1],
+        [2, 2, np.pi/4, 1],
+        [2, 2, np.pi/4, 1],
+        [2, 2, np.pi/4, 1],
+        [2, 2, np.pi/4, 1],
+        [2, 2, np.pi/4, 1]]
+visualize_path(forward_propagate_rigid_body(start, path), 'component_3_propogate.gif')
+
+#Interpolate
+start_pose = [0,-8,0]
+goal_pose = [0,8,np.pi]
+visualize_path(interpolate_rigid_body(start_pose, goal_pose, 10), 'component_3_interpolate.gif')

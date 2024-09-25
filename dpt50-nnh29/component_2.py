@@ -4,6 +4,9 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import unittest
+from component_1 import check_quaternion
+from component_1 import check_SOn
 
 ############################################################
 #                Uniform Random Rotations                  #
@@ -99,6 +102,10 @@ def visualize_rotation_sphere(amount, naive):
     ax.set_title('3D Visualization of 50 Random Rotations on Unit Sphere')
     plt.show()
 
+############################################################
+#                       Extra Credit                       #
+############################################################
+
 '''
 #Input: A boolean that defines how the rotation is generated. If naive
 # is true, implement a naive solution (for example, random euler angles and convert to rotation
@@ -120,7 +127,7 @@ def random_quaternion(naive):
         #Algoriithm 2
         s = np.random.rand()
         sigma1 = np.sqrt(1-s)
-        sigma2 = np.sqrt(2)
+        sigma2 = np.sqrt(s)
         theta1 = 2 * np.pi * np.random.rand()
         theta2 = 2 * np.pi * np.random.rand()
 
@@ -130,3 +137,39 @@ def random_quaternion(naive):
         z = np.sin(theta2) * sigma2
 
     return np.array([w,x,y,z])
+
+############################################################
+#                      Unit Tests                          #
+############################################################
+
+class TestRandomFunctions(unittest.TestCase):
+
+#random_rotation_matrix(True)
+    def test_random_rotation_1(self):
+        for _ in range(50):
+            rotation = random_rotation_matrix(True)
+            self.assertTrue(check_SOn(rotation))
+
+#random_rotation_matrix(False)
+    def test_random_rotation_2(self):
+        for _ in range(50):
+            rotation = random_rotation_matrix(False)
+            self.assertTrue(check_SOn(rotation))
+
+#random_quaternion(True)
+    def test_random_quaternion_1(self):
+        for _ in range(50):
+            quaternion = random_quaternion(True)
+            self.assertTrue(check_quaternion(quaternion))
+
+#random_quaternion(False)
+    def test_random_quaternion_2(self):
+        for _ in range(50):
+            quaternion = random_quaternion(False)
+            self.assertTrue(check_quaternion(quaternion))
+
+#Visualize sphere
+visualize_rotation_sphere(100, False)
+
+if __name__ == '__main__':
+    unittest.main()
