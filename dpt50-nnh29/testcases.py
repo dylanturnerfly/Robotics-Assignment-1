@@ -6,6 +6,7 @@ TestComponent2 = True
 TestComponent3 = True
 TestComponent4 = True
 
+
 ############################################################
 #                  Validating Rotations                    #
 ############################################################
@@ -176,3 +177,28 @@ if(TestComponent4):
 
     path = component_4.forward_propagate_arm(start_angles, plan)
     component_4.visualize_arm_path(path, 'component_4_propogate.gif', 20)
+
+
+
+
+
+
+
+#
+# R = np.array([[0.123, 0.521, 12], [1, 3.4, 1.9], [4, 2.32, 1.12]])  
+# print(check_SOn(R))
+# print(correct_SOn(R))
+# print(check_SOn(correct_SOn(R)))
+
+# R = np.array([[1,0,1],[1,1,1],[1,0.5,0.25]])
+# print(check_SOn(correct_SOn(R)))
+# print(check_SEn(R))
+# print(correct_SEn(R))
+# R2 = correct_SEn(R)
+# print(check_SEn(R2))
+
+# q = [1, 1, 0, 1]
+# print(check_quaternion(q))
+# print(correct_quaternion(q))
+# q2 = correct_quaternion(q)
+# print(check_quaternion(q2))

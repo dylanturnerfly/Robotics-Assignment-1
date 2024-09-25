@@ -4,13 +4,13 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from component_1 import check_SEn
 from PIL import Image
 import io
 
 ############################################################
 #                  Rigid Body in Motion                    #
 ############################################################
+
 '''
 Input: start pose x0 ∈SE(2) and goal position xG in nSE(2). Output
 a path (sequence of poses) that start at x0 and ends in xG.

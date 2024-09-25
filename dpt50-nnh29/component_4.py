@@ -10,6 +10,7 @@ import io
 ############################################################
 #                   Movement of an Arm                     #
 ############################################################
+
 '''
 Input: start configuration q0 = (θ0,θ1) and goal configuration qG. Output
 a path (sequence of poses) that start at q0 and ends in qG.

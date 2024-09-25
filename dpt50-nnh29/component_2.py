@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 ############################################################
 #                Uniform Random Rotations                  #
 ############################################################
+
 '''
 Input: A boolean that defines how the rotation is generated. If
 naive is true, implement a naive solution (for example, random euler angles and convert to
@@ -98,13 +99,34 @@ def visualize_rotation_sphere(amount, naive):
     ax.set_title('3D Visualization of 50 Random Rotations on Unit Sphere')
     plt.show()
 
-
-#EXTRA CREDIT:
-
+'''
 #Input: A boolean that defines how the rotation is generated. If naive
 # is true, implement a naive solution (for example, random euler angles and convert to rotation
 # matrix). If naive is false, implement the function as defined in Algorithm 2 in [2]. Return: A
 # randomly generated element q∈S3
+'''
 def random_quaternion(naive):
-    vector = 1
-    return vector
+    if(naive):
+        #my naive solution is to simply generate 4 random numbers and divide by their magnitude
+        random_numbers = np.random.rand(4)
+        magnitude = np.linalg.norm(random_numbers)
+        if magnitude == 0:
+            quaternion = np.array([1, 0, 0, 0])  
+        else:
+            quaternion = random_numbers / magnitude
+        return quaternion
+    
+    else:
+        #Algoriithm 2
+        s = np.random.rand()
+        sigma1 = np.sqrt(1-s)
+        sigma2 = np.sqrt(2)
+        theta1 = 2 * np.pi * np.random.rand()
+        theta2 = 2 * np.pi * np.random.rand()
+
+        w = np.cos(theta2) * sigma2
+        x = np.sin(theta1) * sigma1
+        y = np.cos(theta1) * sigma1
+        z = np.sin(theta2) * sigma2
+
+    return np.array([w,x,y,z])
