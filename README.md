@@ -1,0 +1,15 @@
+To run, make sure you are in the correct directory first. 
+Then in the terminal enter:
+
+python3 ./component_1.py
+
+python3 ./component_2.py
+
+python3 ./component_3.py
+
+python3 ./component_4.py
+
+This will run unit tests, display visualizations, and generate gifs.
+
+Please let me know if you have any questions. Thank you!
+dylanturnerfly@gmail.com
