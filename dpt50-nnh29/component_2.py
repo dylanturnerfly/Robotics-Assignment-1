@@ -124,7 +124,7 @@ def random_quaternion(naive):
         return quaternion
     
     else:
-        #Algoriithm 2
+        #Algorithm 2
         s = np.random.rand()
         sigma1 = np.sqrt(1-s)
         sigma2 = np.sqrt(s)
@@ -169,7 +169,9 @@ class TestRandomFunctions(unittest.TestCase):
             self.assertTrue(check_quaternion(quaternion))
 
 #Visualize sphere
-visualize_rotation_sphere(100, False)
+visualize_rotation_sphere(50, False)
+
+visualize_rotation_sphere(50, True)
 
 if __name__ == '__main__':
     unittest.main()

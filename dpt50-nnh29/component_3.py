@@ -127,7 +127,6 @@ def visualize_path(path, name = 'Animation.gif'):
 #                         Tests                            #
 ############################################################
 
-
 #Propogate
 start = [[1, 0, 0],
         [0, 1, 0],
